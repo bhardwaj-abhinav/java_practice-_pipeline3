@@ -32,7 +32,7 @@ pipeline{
                   steps{
                         bat '''
                           echo "Building version: ${VERSION} with suffix: ${RELEASE_VERSION}"
-                          mvn -f javaapp_pipeline/pom.xml clean install
+                          mvn clean install
                         '''
                   }
             }
