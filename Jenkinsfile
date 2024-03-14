@@ -33,7 +33,7 @@ pipeline{
                         echo "Building version: ${VERSION} with suffix: ${RELEASE_VERSION}"
                         bat '''
                           
-                          mvn versions:set -DnewVersion="${VERSION}" -SNAPSHOT
+                          mvn versions:set -DnewVersion="${VERSION}"-SNAPSHOT
                           mvn versions:update-child-modules
                           mvn clean package
                         '''
