@@ -30,9 +30,12 @@ pipeline{
 
             stage('Build'){
                   steps{
+                        echo "Building version: ${VERSION} with suffix: ${RELEASE_VERSION}"
                         bat '''
-                          echo "Building version: ${VERSION} with suffix: ${RELEASE_VERSION}"
-                          mvn clean install
+                          
+                          mvn versions:set -DnewVersion="${VERSION}" -SNAPSHOT
+                          mvn versions:update-child-modules
+                          mvn clean package
                         '''
                   }
             }
