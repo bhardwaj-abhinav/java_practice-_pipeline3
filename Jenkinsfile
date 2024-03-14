@@ -10,7 +10,7 @@ pipeline{
             stage('Audit tools'){
                   steps {
                         bat '''
-                           git version
+                           git --version
                            java --version
                            mvn --version   
                         '''
@@ -19,7 +19,7 @@ pipeline{
 
             stage('Unit Test') {
                   steps{
-                        dir('javaapp_pipeline'){
+                        dir('/'){
                               bat '''
                                echo "Executing Unit Tests..."
                                mvn test
