@@ -19,12 +19,12 @@ pipeline{
 
             stage('Unit Test') {
                   steps{
-                        dir('/'){
+                       
                               bat '''
                                echo "Executing Unit Tests..."
                                mvn test
                               '''
-                        }
+                        
                   }
             }
 
