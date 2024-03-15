@@ -34,7 +34,7 @@ pipeline{
 
             stage('Build'){
                  environment {
-                        VERSION_SUFFIX = "${sh(script:'if [ "${RELEASE}" = false ] ; then echo -n "${INT_VERSION}"ci:"${BUILD_NUMBER}"; else echo -n "${RELEASE_VERSION}":"${BUILD_NUMBER}"; fi', returnStdout: true)}"
+                        VERSION_SUFFIX = "${bat(script: 'if "%RELEASE%"=="true" (echo %INT_VERSION%ci:%BUILD_NUMBER%) else (echo %RELEASE_VERSION%ci:%BUILD_NUMBER%)', returnStdout: true)}"
                   }
 
                   steps{
@@ -45,6 +45,12 @@ pipeline{
                           mvn versions:update-child-modules
                           mvn clean package
                         """
+                  }
+            }
+
+            stage('Publish'){
+                  steps{
+                        archiveArtifacts('**.*war')
                   }
             }
 
