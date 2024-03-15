@@ -13,11 +13,8 @@ pipeline{
       stages {
             stage('Audit tools'){
                   steps {
-                        bat '''
-                           git --version
-                           java --version
-                           mvn --version   
-                        '''
+                        auditTools()
+                        
                   }
             }
 
@@ -34,7 +31,7 @@ pipeline{
 
             stage('Build'){
                  environment {
-                        VERSION_SUFFIX = "${bat(script: 'if "%RELEASE%"=="true" (echo %INT_VERSION%ci:%BUILD_NUMBER%) else (echo %RELEASE_VERSION%ci:%BUILD_NUMBER%)', returnStdout: true)}"
+                        VERSION_SUFFIX = getBuiltVersion()
                   }
 
                   steps{
@@ -64,5 +61,22 @@ pipeline{
             always{
                   cleanWs()
             }
+      }
+}
+
+void auditTools(){
+      bat '''
+            git --version
+            java --version
+            mvn --version   
+            '''
+}
+
+String getBuiltVersion(){
+      if (params.RELEASE){
+            return env.RELEASE_VERSION + ':' env.BUILD_NUMBER
+      }
+      else {
+            return env.INT_VERSION + 'ci:' env.BUILD_NUMBER
       }
 }
