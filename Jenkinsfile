@@ -34,7 +34,7 @@ pipeline{
 
             stage('Build'){
                  environment {
-                        VERSION_SUFFIX = bat(script: 'cmd /c if "%RELEASE%"=="false" (echo %INT_VERSION%ci:%BUILD_NUMBER%) else (echo %RELEASE_VERSION%:%BUILD_NUMBER%)', returnStdout: true).trim()
+                        VERSION_SUFFIX = bat(script: 'cmd /c if "%RELEASE%"=="false" (echo "%INT_VERSION%ci:%BUILD_NUMBER%") else (echo "%RELEASE_VERSION%ci:%BUILD_NUMBER%")', returnStdout: true).trim()
                   }
 
                   steps{
