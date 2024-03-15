@@ -34,7 +34,7 @@ pipeline{
 
             stage('Build'){
                  environment {
-                        VERSION_SUFFIX = '${bat(script: 'if "%RELEASE%"=="true" (echo %INT_VERSION%ci:%BUILD_NUMBER%) else (echo %RELEASE_VERSION%ci:%BUILD_NUMBER%)', returnStdout: true)}'
+                        VERSION_SUFFIX = "${bat(script: 'if "%RELEASE%"=="true" (echo %INT_VERSION%ci:%BUILD_NUMBER%) else (echo %RELEASE_VERSION%ci:%BUILD_NUMBER%)', returnStdout: true)}"
                   }
 
                   steps{
