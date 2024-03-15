@@ -74,9 +74,9 @@ void auditTools(){
 
 String getBuiltVersion(){
       if (params.RELEASE){
-            return env.RELEASE_VERSION + ':' env.BUILD_NUMBER
+            return env.RELEASE_VERSION + ':' + env.BUILD_NUMBER
       }
       else {
-            return env.INT_VERSION + 'ci:' env.BUILD_NUMBER
+            return env.INT_VERSION + 'ci:' + env.BUILD_NUMBER
       }
 }
