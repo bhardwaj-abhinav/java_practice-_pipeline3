@@ -79,7 +79,7 @@ String getBuiltVersion(){
 
 void paclageApp(){
       bat """
-      mvn versions:set -DnewVersion="${VERSION_SUFFIX}"-SNAPSHOT
+      mvn versions:set -DnewVersion=${VERSION_SUFFIX}-SNAPSHOT
       mvn versions:update-child-modules
       mvn clean package
       """
