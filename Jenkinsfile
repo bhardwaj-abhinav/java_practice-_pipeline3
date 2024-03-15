@@ -37,11 +37,7 @@ pipeline{
                   steps{
                         echo "Building version: ${INT_VERSION} with suffix: ${VERSION_SUFFIX}"
                         echo "${VERSION_SUFFIX}"
-                        bat """
-                          mvn versions:set -DnewVersion="${VERSION_SUFFIX}"-SNAPSHOT
-                          mvn versions:update-child-modules
-                          mvn clean package
-                        """
+                        paclageApp()
                   }
             }
 
@@ -79,4 +75,12 @@ String getBuiltVersion(){
       else {
             return env.INT_VERSION + 'ci:' + env.BUILD_NUMBER
       }
+}
+
+void paclageApp(){
+      bat """
+      mvn versions:set -DnewVersion="${VERSION_SUFFIX}"-SNAPSHOT
+      mvn versions:update-child-modules
+      mvn clean package
+      """
 }
